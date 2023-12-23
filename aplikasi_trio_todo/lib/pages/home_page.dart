@@ -1,3 +1,4 @@
+import 'package:aplikasi_trio_todo/pages/add_task_bar.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -79,7 +80,8 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          MyButton(label: " \n    + AddTask", onTap: () => null)
+          MyButton(
+              label: " \n    + AddTask", onTap: () => Get.to(AddTaskPage()))
         ],
       ),
     );
