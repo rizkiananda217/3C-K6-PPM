@@ -1,6 +1,6 @@
 {
-    "name": "hello_world",
-    "short_name": "hello_world",
+    "name": "todo_list_beta",
+    "short_name": "todo_list_beta",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
