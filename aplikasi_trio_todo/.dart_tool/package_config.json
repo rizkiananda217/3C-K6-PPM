@@ -50,6 +50,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "date_picker_timeline",
+      "rootUri": "file:///C:/Users/Windows/AppData/Local/Pub/Cache/hosted/pub.dev/date_picker_timeline-1.2.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "dbus",
       "rootUri": "file:///C:/Users/Windows/AppData/Local/Pub/Cache/hosted/pub.dev/dbus-0.7.10",
       "packageUri": "lib/",
@@ -147,9 +153,9 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///C:/Users/Windows/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
+      "rootUri": "file:///C:/Users/Windows/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.18.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "js",
@@ -332,7 +338,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-12-23T14:43:27.130383Z",
+  "generated": "2023-12-23T15:59:34.167305Z",
   "generator": "pub",
   "generatorVersion": "3.1.0"
 }
