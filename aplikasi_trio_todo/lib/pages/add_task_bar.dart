@@ -14,6 +14,8 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
   DateTime _selectedData = DateTime.now();
   String _endTime = "9:30 PM";
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
@@ -38,8 +40,16 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   "Add Task",
                   style: headingStyle,
                 ),
-                MyInputField(title: "Title", hint: "Enter your title"),
-                MyInputField(title: "Note", hint: "Enter your note"),
+                MyInputField(
+                  title: "Title",
+                  hint: "Enter your title",
+                  controller: _titleController,
+                ),
+                MyInputField(
+                  title: "Note",
+                  hint: "Enter your note",
+                  controller: _noteController,
+                ),
                 MyInputField(
                     title: "Date",
                     hint: DateFormat.yMd().format(_selectedData),
@@ -143,15 +153,31 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     _colorPallete(),
-                    MyButton(label: "\n  Create Task + ", onTap: () => null)
+                    MyButton(
+                        label: "\n  Create Task + ",
+                        onTap: () => _validateDate())
                   ],
                 )
               ],
             ),
           ),
         ));
+  }
+
+  _validateDate() {
+    if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
+      //menambahkan ke database
+      Get.back();
+    } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
+      Get.snackbar("Required", "All fields are required !",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.white,
+          colorText: pinkClr,
+          icon: Icon(Icons.warning_amber_rounded, color: Colors.red));
+    }
   }
 
   _colorPallete() {
