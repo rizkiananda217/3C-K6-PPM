@@ -1,90 +1,226 @@
+// import 'package:flutter/material.dart';
+
+// void main() => runApp(const MyApp());
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+//   static const String _title = 'Flutter Stateful Clicker Counter';
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: _title,
+//       theme: ThemeData(
+//         primarySwatch: Colors.blue,
+//       ),
+//       home: const MyHomePage(),
+//     );
+//   }
+// }
+
+// class MyHomePage extends StatefulWidget {
+//   const MyHomePage({super.key});
+//   // This widget is the home page of your application. It is stateful, meaning
+//   // that it has a State object (defined below) that contains fields that affect
+//   // how it looks.
+//   // This class is the configuration for the state.
+//   @override
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
+
+// class _MyHomePageState extends State<MyHomePage> {
+//   int _counter = 0;
+
+//   void _incrementCounter() {
+//     setState(() {
+//       // This call to setState tells the Flutter framework that something has
+//       // changed in this State, which causes it to rerun the build method below
+//       // so that the display can reflect the updated values. If we changed
+//       // _counter without calling setState(), then the build method would not be
+//       // called again, and so nothing would appear to happen.
+//       _counter++;
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // This method is rerun every time setState is called, for instance as done
+//     // by the _incrementCounter method above.
+//     //
+//     // The Flutter framework has been optimized to make rerunning build methods
+//     // fast, so that you can just rebuild anything that needs updating rather
+//     // than having to individually change instances of widgets.
+//     return Scaffold(
+//       appBar: AppBar(
+//         // Here we take the value from the MyHomePage object that was created by
+//         // the App.build method, and use it to set our appbar title.
+//         title: const Text('Flutter Demo Click Counter'),
+//       ),
+//       body: Center(
+//         // Center is a layout widget. It takes a single child and positions it
+//         // in the middle of the parent.
+//         child: Column(
+//           // Column is also a layout widget. It takes a list of children and
+//           // arranges them vertically. By default, it sizes itself to fit its
+//           // children horizontally, and tries to be as tall as its parent.
+//           //
+//           // Column has various properties to control how it sizes itself and
+//           // how it positions its children. Here we use mainAxisAlignment to
+//           // center the children vertically; the main axis here is the vertical
+//           // axis because Columns are vertical (the cross axis would be
+//           // horizontal).
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: <Widget>[
+//             const Text(
+//               'You have pushed the button this many times:',
+//             ),
+//             Text(
+//               '$_counter',
+//               style: const TextStyle(fontSize: 25),
+//             ),
+//           ],
+//         ),
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         onPressed: _incrementCounter,
+//         tooltip: 'Increment',
+//         child: const Icon(Icons.add),
+//       ),
+//     );
+//   }
+// }
+
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  static const String _title = 'Flutter Stateful Clicker Counter';
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
+      title: 'Aplikasi Login',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: LoginPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-  // This class is the configuration for the state.
+class LoginPage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _loginUsernameController = TextEditingController();
+  final TextEditingController _loginPasswordController = TextEditingController();
+  final TextEditingController _registerUsernameController = TextEditingController();
+  final TextEditingController _registerPasswordController = TextEditingController();
 
-  void _incrementCounter() {
+  bool _showLogin = true;
+
+  void _toggleView() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _showLogin = !_showLogin;
     });
+  }
+
+  void _login() {
+    String username = _loginUsernameController.text;
+    String password = _loginPasswordController.text;
+
+    // Tambahkan logika login Anda di sini
+    // Untuk kesederhanaan, mari mencetak username dan password
+    print("Login - Username: $username");
+    print("Login - Password: $password");
+
+    // Arahkan ke layar utama atau tampilkan pesan kesalahan berdasarkan logika login Anda
+  }
+
+  void _register() {
+    String username = _registerUsernameController.text;
+    String password = _registerPasswordController.text;
+
+    // Tambahkan logika pendaftaran Anda di sini
+    // Untuk kesederhanaan, mari mencetak username dan password yang didaftarkan
+    print("Register - Username: $username");
+    print("Register - Password: $password");
+
+    // Implementasikan logika penyimpanan pengguna baru, misalnya ke database
+    // Setelah berhasil mendaftar, Anda mungkin ingin mengarahkan pengguna ke halaman login
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: const Text('Flutter Demo Click Counter'),
+        title: Text('Halaman Login'),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: const TextStyle(fontSize: 25),
-            ),
-          ],
+          children: _showLogin
+              ? [
+                  TextField(
+                    controller: _loginUsernameController,
+                    decoration: InputDecoration(
+                      labelText: 'Username',
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  TextField(
+                    controller: _loginPasswordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                    ),
+                  ),
+                  SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: _login,
+                    child: Text('Login'),
+                  ),
+                  SizedBox(height: 24),
+                  Text('Belum punya akun?'),
+                  SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: _toggleView,
+                    child: Text('Daftar'),
+                  ),
+                ]
+              : [
+                  TextField(
+                    controller: _registerUsernameController,
+                    decoration: InputDecoration(
+                      labelText: 'Username',
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  TextField(
+                    controller: _registerPasswordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                    ),
+                  ),
+                  SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: _register,
+                    child: Text('Daftar'),
+                  ),
+                  SizedBox(height: 24),
+                  Text('Sudah punya akun?'),
+                  SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: _toggleView,
+                    child: Text('Login'),
+                  ),
+                ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
