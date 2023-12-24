@@ -20,6 +20,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   List<int> remindList = [5, 10, 15, 20, 25, 30];
   String _selectedRepeat = "None";
   List<String> repeatList = ["None", "Daily", "Weekly", "Monthly"];
+  int _selectedColor = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +136,53 @@ class _AddTaskPageState extends State<AddTaskPage> {
                               style: TextStyle(color: Colors.grey)));
                     }).toList(),
                   ),
-                )
+                ),
+                SizedBox(
+                  height: 18,
+                ),
+                Row(children: [
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Color",
+                          style: titleStyle,
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        Wrap(
+                          children: List<Widget>.generate(3, (int index) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _selectedColor = index;
+                                  print("$index");
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: CircleAvatar(
+                                  radius: 14,
+                                  backgroundColor: index == 0
+                                      ? primaryClr
+                                      : index == 1
+                                          ? pinkClr
+                                          : yellowhClr,
+                                  child: _selectedColor == index
+                                      ? Icon(
+                                          Icons.done,
+                                          color: Colors.white,
+                                          size: 16,
+                                        )
+                                      : Container(),
+                                ),
+                              ),
+                            );
+                          }),
+                        )
+                      ])
+                ])
               ],
             ),
           ),
