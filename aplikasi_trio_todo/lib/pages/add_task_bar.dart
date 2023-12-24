@@ -3,10 +3,17 @@ import 'package:aplikasi_trio_todo/services/theme_services.dart';
 import 'package:aplikasi_trio_todo/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
-class AddTaskPage extends StatelessWidget {
+class AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
 
+  @override
+  State<AddTaskPage> createState() => _AddTaskPageState();
+}
+
+class _AddTaskPageState extends State<AddTaskPage> {
+  DateTime _selectedData = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +29,18 @@ class AddTaskPage extends StatelessWidget {
                   "Add Task",
                   style: headingStyle,
                 ),
-                MyInputField(title: "Title", hint: "Enter your title")
+                MyInputField(title: "Title", hint: "Enter your title"),
+                MyInputField(title: "Note", hint: "Enter your note"),
+                MyInputField(
+                    title: "Date",
+                    hint: DateFormat.yMd().format(_selectedData),
+                    widget: IconButton(
+                      icon: Icon(Icons.calendar_today_outlined,
+                          color: Colors.grey),
+                      onPressed: () {
+                        _getDateFromUser();
+                      },
+                    ))
               ],
             ),
           ),
@@ -49,5 +67,22 @@ class AddTaskPage extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  _getDateFromUser() async {
+    DateTime? _pickerDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2121));
+
+    if (_pickerDate != null) {
+      setState(() {
+        _selectedData = _pickerDate;
+        print(_selectedData);
+      });
+    } else {
+      print("ini kosong, atau ada yang salah");
+    }
   }
 }
