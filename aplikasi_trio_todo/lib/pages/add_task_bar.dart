@@ -14,6 +14,11 @@ class AddTaskPage extends StatefulWidget {
 
 class _AddTaskPageState extends State<AddTaskPage> {
   DateTime _selectedData = DateTime.now();
+  String _endTime = "9:30 PM";
+  String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
+  int _selectedRemind = 5;
+  List<int> remindList = [5, 10, 15, 20, 25, 30];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +45,67 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       onPressed: () {
                         _getDateFromUser();
                       },
-                    ))
+                    )),
+                Row(children: [
+                  Expanded(
+                      child: MyInputField(
+                    title: "Start Date",
+                    hint: _startTime,
+                    widget: IconButton(
+                      onPressed: () {
+                        _getTimeFromUser(isStarTime: true);
+                      },
+                      icon: Icon(
+                        Icons.access_time_rounded,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  )),
+                  SizedBox(
+                    width: 12,
+                  ),
+                  Expanded(
+                      child: MyInputField(
+                    title: "End Date",
+                    hint: _endTime,
+                    widget: IconButton(
+                      onPressed: () {
+                        _getTimeFromUser(isStarTime: false);
+                      },
+                      icon: Icon(
+                        Icons.access_time_rounded,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ))
+                ]),
+                MyInputField(
+                  title: "Remind",
+                  hint: "$_selectedRemind minutes early",
+                  widget: DropdownButton(
+                    icon: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Colors.grey,
+                    ),
+                    iconSize: 32,
+                    elevation: 4,
+                    style: subTitleStyle,
+                    underline: Container(
+                      height: 0,
+                    ),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedRemind = int.parse(newValue!);
+                      });
+                    },
+                    items:
+                        remindList.map<DropdownMenuItem<String>>((int value) {
+                      return DropdownMenuItem<String>(
+                          value: value.toString(),
+                          child: Text(value.toString()));
+                    }).toList(),
+                  ),
+                )
               ],
             ),
           ),
@@ -84,5 +149,32 @@ class _AddTaskPageState extends State<AddTaskPage> {
     } else {
       print("ini kosong, atau ada yang salah");
     }
+  }
+
+  _getTimeFromUser({required bool isStarTime}) async {
+    var pickedTime = await _showTimePicker();
+    String _formatedTime = pickedTime.format(context);
+    if (pickedTime == null) {
+      print("waktu dibatalkan");
+    } else if (isStarTime == true) {
+      setState(() {
+        _startTime = _formatedTime;
+      });
+    } else if (isStarTime == false) {
+      setState(() {
+        _endTime = _formatedTime;
+      });
+    }
+  }
+
+  _showTimePicker() {
+    return showTimePicker(
+        initialEntryMode: TimePickerEntryMode.input,
+        context: context,
+        initialTime: TimeOfDay(
+          // _starTime 10.30 AM
+          hour: int.parse(_startTime.split(":")[0]),
+          minute: int.parse(_startTime.split(":")[0]),
+        ));
   }
 }
