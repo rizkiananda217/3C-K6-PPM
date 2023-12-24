@@ -140,53 +140,55 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 SizedBox(
                   height: 18,
                 ),
-                Row(children: [
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Color",
-                          style: titleStyle,
-                        ),
-                        SizedBox(
-                          height: 8.0,
-                        ),
-                        Wrap(
-                          children: List<Widget>.generate(3, (int index) {
-                            return GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  _selectedColor = index;
-                                  print("$index");
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: CircleAvatar(
-                                  radius: 14,
-                                  backgroundColor: index == 0
-                                      ? primaryClr
-                                      : index == 1
-                                          ? pinkClr
-                                          : yellowhClr,
-                                  child: _selectedColor == index
-                                      ? Icon(
-                                          Icons.done,
-                                          color: Colors.white,
-                                          size: 16,
-                                        )
-                                      : Container(),
-                                ),
-                              ),
-                            );
-                          }),
-                        )
-                      ])
-                ])
+                Row(
+                  children: [_colorPallete()],
+                )
               ],
             ),
           ),
         ));
+  }
+
+  _colorPallete() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        "Color",
+        style: titleStyle,
+      ),
+      SizedBox(
+        height: 8.0,
+      ),
+      Wrap(
+        children: List<Widget>.generate(3, (int index) {
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                _selectedColor = index;
+                print("$index");
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: CircleAvatar(
+                radius: 14,
+                backgroundColor: index == 0
+                    ? primaryClr
+                    : index == 1
+                        ? pinkClr
+                        : yellowhClr,
+                child: _selectedColor == index
+                    ? Icon(
+                        Icons.done,
+                        color: Colors.white,
+                        size: 16,
+                      )
+                    : Container(),
+              ),
+            ),
+          );
+        }),
+      )
+    ]);
   }
 
   _appBar(BuildContext context) {
