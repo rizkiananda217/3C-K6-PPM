@@ -1,5 +1,6 @@
 import 'package:aplikasi_trio_todo/pages/theme.dart';
 import 'package:aplikasi_trio_todo/services/theme_services.dart';
+import 'package:aplikasi_trio_todo/widgets/button.dart';
 import 'package:aplikasi_trio_todo/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -141,7 +142,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   height: 18,
                 ),
                 Row(
-                  children: [_colorPallete()],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _colorPallete(),
+                    MyButton(label: "\n  Create Task + ", onTap: () => null)
+                  ],
                 )
               ],
             ),
