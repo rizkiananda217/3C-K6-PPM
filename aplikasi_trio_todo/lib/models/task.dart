@@ -34,4 +34,19 @@ class Task {
     remind = json['remind'];
     repeat = json['repeat'];
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['note'] = this.note;
+    data['isCompleted'] = this.isCompleted;
+    data['date'] = this.date;
+    data['startTime'] = this.startTime;
+    data['endTime'] = this.endTime;
+    data['color'] = this.color;
+    data['remind'] = this.remind;
+    data['repeat'] = this.repeat;
+    return data;
+  }
 }

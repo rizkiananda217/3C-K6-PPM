@@ -1,3 +1,5 @@
+import 'package:aplikasi_trio_todo/controllers/task_controller.dart';
+import 'package:aplikasi_trio_todo/models/task.dart';
 import 'package:aplikasi_trio_todo/pages/theme.dart';
 import 'package:aplikasi_trio_todo/services/theme_services.dart';
 import 'package:aplikasi_trio_todo/widgets/button.dart';
@@ -10,10 +12,11 @@ class AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
 
   @override
-  State<AddTaskPage> createState() => _AddTaskPageState();
+  _AddTaskPageState createState() => _AddTaskPageState();
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final TaskController _taskController = Get.put(TaskController());
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   DateTime _selectedData = DateTime.now();
@@ -169,7 +172,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   _validateDate() {
     if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
-      //menambahkan ke database
+      _addTaskToDb();
       Get.back();
     } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
       Get.snackbar("Required", "All fields are required !",
@@ -178,6 +181,22 @@ class _AddTaskPageState extends State<AddTaskPage> {
           colorText: pinkClr,
           icon: Icon(Icons.warning_amber_rounded, color: Colors.red));
     }
+  }
+
+  _addTaskToDb() async {
+    int value = await _taskController.addTask(
+        task: Task(
+      note: _noteController.text,
+      title: _titleController.text,
+      date: DateFormat.yMd().format(_selectedData),
+      startTime: _startTime,
+      endTime: _endTime,
+      remind: _selectedRemind,
+      repeat: _selectedRepeat,
+      color: _selectedColor,
+      isCompleted: 0,
+    ));
+    print("My id is " + "$value");
   }
 
   _colorPallete() {
