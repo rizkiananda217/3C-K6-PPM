@@ -1,3 +1,4 @@
+import 'package:aplikasi_trio_todo/controllers/task_controller.dart';
 import 'package:aplikasi_trio_todo/pages/add_task_bar.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +18,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DateTime _selectedData = DateTime.now();
+  final _taskController = Get.put(TaskController());
   @override
   Widget build(BuildContext context) {
+    print("build method called");
     return Scaffold(
       appBar: _appBar(),
       backgroundColor: context.theme.backgroundColor,
@@ -26,8 +29,27 @@ class _HomePageState extends State<HomePage> {
         children: [
           _addTaskBar(),
           _addDateBar(),
+          _showTasks(),
         ],
       ),
+    );
+  }
+
+  _showTasks() {
+    return Expanded(
+      child: Obx(() {
+        return ListView.builder(
+            itemCount: _taskController.taskList.length,
+            itemBuilder: (_, context) {
+              print(_taskController.taskList.length);
+              return Container(
+                width: 100,
+                height: 50,
+                color: Colors.green,
+                margin: const EdgeInsets.only(bottom: 10),
+              );
+            });
+      }),
     );
   }
 
@@ -82,7 +104,11 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           MyButton(
-              label: " \n    + AddTask", onTap: () => Get.to(AddTaskPage()))
+              label: " \n    + AddTask",
+              onTap: () async {
+                await Get.to(() => AddTaskPage());
+                _taskController.getTasks();
+              })
         ],
       ),
     );
